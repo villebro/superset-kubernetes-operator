@@ -27,6 +27,10 @@ This page tracks notable changes in Apache Superset Kubernetes Operator releases
 
 - Kubernetes support now covers the three newest `kind`-published minor versions instead of two. CI tests Kubernetes 1.37, 1.36, and 1.35 natively, with the experimental `next` lane disabled again ([#317](https://github.com/apache/superset-kubernetes-operator/pull/317)).
 
+### Fixed
+
+- The operator no longer crash-loops on clusters where Gateway API is installed but serves only `v1beta1`: optional-API detection now pins the version the operator actually uses (`HTTPRoute` v1, `ServiceMonitor` v1) instead of matching any version of the Kind ([#361](https://github.com/apache/superset-kubernetes-operator/pull/361), [@villebro](https://github.com/villebro)).
+
 ### Security
 
 - **Breaking:** CRs with `serviceAccount.create=true` (or unset) and `serviceAccount.name != metadata.name` are now rejected at admission. To use a pre-existing ServiceAccount with a different name, set `serviceAccount.create=false` ([#324](https://github.com/apache/superset-kubernetes-operator/pull/324), [@villebro](https://github.com/villebro)).
