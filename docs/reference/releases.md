@@ -30,6 +30,7 @@ This page tracks notable changes in Apache Superset Kubernetes Operator releases
 ### Fixed
 
 - The operator no longer crash-loops on clusters where Gateway API is installed but serves only `v1beta1`: optional-API detection now pins the version the operator actually uses (`HTTPRoute` v1, `ServiceMonitor` v1) instead of matching any version of the Kind ([#361](https://github.com/apache/superset-kubernetes-operator/pull/361), [@villebro](https://github.com/villebro)).
+- The operator now requests `update` on `supersets/finalizers`, so reconciliation no longer fails on clusters with the `OwnerReferencesPermissionEnforcement` admission plugin enabled (e.g. OpenShift), where the API server previously rejected the `blockOwnerDeletion` owner references the operator sets on child resources ([#359](https://github.com/apache/superset-kubernetes-operator/pull/359), [@villebro](https://github.com/villebro)).
 
 ### Security
 
