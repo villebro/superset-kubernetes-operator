@@ -30,6 +30,7 @@ This page tracks notable changes in Apache Superset Kubernetes Operator releases
 ### Fixed
 
 - The operator-managed maintenance page now sets `seccompProfile: RuntimeDefault` on its container, so it is admitted in namespaces enforcing the restricted Pod Security Standard (its other hardened defaults were already set, but the missing seccomp profile caused rejection) ([#362](https://github.com/apache/superset-kubernetes-operator/pull/362), [@villebro](https://github.com/villebro)).
+- The operator now requests `update` on `supersets/finalizers`, so reconciliation no longer fails on clusters with the `OwnerReferencesPermissionEnforcement` admission plugin enabled (e.g. OpenShift), where the API server previously rejected the `blockOwnerDeletion` owner references the operator sets on child resources ([#359](https://github.com/apache/superset-kubernetes-operator/pull/359), [@villebro](https://github.com/villebro)).
 
 ### Security
 
